@@ -35,6 +35,7 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          <SalePrice variant={variant}>{variant === 'new-release' ? 'Just released!' : variant === 'on-sale' ? 'Sale' : ''}</SalePrice>
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
@@ -53,15 +54,21 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  flex: 1 1 300px;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
@@ -79,8 +86,15 @@ const ColorInfo = styled.p`
 `;
 
 const SalePrice = styled.span`
+  position: absolute;
+  right: -4px;
+  top: 12px;
   font-weight: ${WEIGHTS.medium};
-  color: ${COLORS.primary};
+  color: ${COLORS.white};
+  padding: 8px;
+  border-radius: 2px;
+  font-weight: bold;
+  background-color: ${props => props.variant === 'new-release' ? COLORS.secondary : props.variant === 'on-sale' ? COLORS.primary : null}
 `;
 
 export default ShoeCard;
